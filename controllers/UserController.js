@@ -7,7 +7,7 @@ export const getUsers = async(req, res) =>{
     //3.query parameter, parseInt untuk merubah mnjadi integer
     const page = parseInt(req.query.page) || 0;
     //4.limit adalah batas data yang mau kita tampilkan
-    const limit = parseInt(req.query.limit) || 10;
+    const limit = parseInt(req.query.limit) || 5;
     //5.berfungsi untuk menampung yang di ketik oleh user
     const search = req.query.search_query || "";
     const offset = limit * page;
@@ -55,6 +55,6 @@ export const getUsers = async(req, res) =>{
         page: page,
         limit: limit,
         totalRows: totalRows,
-        tatalPage: totalPage
+        totalPage: totalPage
     });
 }
