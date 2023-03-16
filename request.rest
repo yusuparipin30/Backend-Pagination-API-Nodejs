@@ -1,4 +1,35 @@
 GET http://localhost:5000/users?search_query=tugi&page=0&limit=10
 
 ###
-GET http://localhost:5000/users?page=0&limit=10
+GET http://localhost:5000/users?page=0&limit=5
+
+
+###
+POST http://localhost:5000/users
+ Content-Type: application/json
+
+{
+"nama": "Burhan",
+ "alamat_domisili": "wanogara",
+ "kamar": "bawah",
+ "jumlah_orang": "10",
+ "status_perkawinan": "menikah",
+ "jenis_kelamin": "laki-laki",
+ "status_tinggal": "Aktif",
+ "kategori_orang": "Dewasa",
+ "alamat_asal": "cikara",
+ "agama": "Islam",
+"no_hp": "123456890",
+"kepemilikan": "Pemilik",
+"nama_pemilik": "Yu"
+}
+
+
+###
+GET http://localhost:5000/users
+
+### 
+GET http://localhost:5000/users/25
+
+###
+ DELETE http://localhost:5000/users/35

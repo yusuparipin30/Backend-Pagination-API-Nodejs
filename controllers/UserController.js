@@ -7,7 +7,7 @@ export const getUsers = async(req, res) =>{
     //3.query parameter, parseInt untuk merubah mnjadi integer
     const page = parseInt(req.query.page) || 0;
     //4.limit adalah batas data yang mau kita tampilkan
-    const limit = parseInt(req.query.limit) || 5;
+    const limit = parseInt(req.query.limit) || 6;
     //5.berfungsi untuk menampung yang di ketik oleh user
     const search = req.query.search_query || "";
     const offset = limit * page;
@@ -15,13 +15,19 @@ export const getUsers = async(req, res) =>{
     const totalRows = await User.count({
         where:{
         [Op.or]: [
-         {name:{
+         {nama:{
             [Op.like]: '%'+search+'%'
         }},
-        {gender:{
+        {alamat_domisili:{
             [Op.like]: '%'+search+'%'
         }},
-         {email:{
+        {kepemilikan:{
+            [Op.like]: '%'+search+'%'
+        }},
+        {jenis_kelamin:{
+            [Op.like]: '%'+search+'%'
+        }},
+         {status_perkawinan:{
             [Op.like]: '%'+search+'%'
         }}]
         }
@@ -33,13 +39,19 @@ export const getUsers = async(req, res) =>{
         //9.opsi kata depan atau belakang
         where:{
             [Op.or]: [
-             {name:{
+             {nama:{
                 [Op.like]: '%'+search+'%'
             }},
-            {gender:{
+            {alamat_domisili:{
                 [Op.like]: '%'+search+'%'
             }},
-             {email:{
+            {kepemilikan:{
+                [Op.like]: '%'+search+'%'
+            }},
+             {jenis_kelamin:{
+                [Op.like]: '%'+search+'%'
+            }},
+            {status_perkawinan:{
                 [Op.like]: '%'+search+'%'
             }}]
             },
@@ -58,3 +70,58 @@ export const getUsers = async(req, res) =>{
         totalPage: totalPage
     });
 }
+
+//membuat method untuk mengambil single data
+//tampil data user
+export const getUserById = async(req, res) => {
+    try {
+        const response = await User.findOne({
+            where:{
+                id: req.params.id
+            }
+        });
+        res.status(200).json(response);
+    }catch (error) {
+        console.log(error.message);
+    }
+}
+
+//tambah data user
+export const createUser = async(req, res) => {
+    try {
+       await User.create(req.body);
+        res.status(201).json({msg:"User Created"});
+    }catch (error) {
+        console.log(error.message);
+    }
+}
+
+//update data user
+export const updateUser = async(req, res) => {
+    try {
+       await User.update(req.body,{
+        where:{
+            id:req.params.id
+        }
+       });
+        res.status(200).json({msg:"User Updated"});
+    }catch (error) {
+        console.log(error.message);
+    }
+}
+
+//delete user
+export const deleteUser = async(req, res) => {
+    try {
+       await User.destroy({
+        where:{
+            id:req.params.id
+        }
+       });
+        res.status(200).json({msg:"User Deleted"});
+    }catch (error) {
+        console.log(error.message);
+    }
+}
+
+
