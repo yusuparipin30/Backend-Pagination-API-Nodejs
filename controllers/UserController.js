@@ -21,6 +21,9 @@ export const getUsers = async(req, res) =>{
         {alamat_domisili:{
             [Op.like]: '%'+search+'%'
         }},
+        {kategori_orang:{
+            [Op.like]: '%'+search+'%'
+        }},
         {kepemilikan:{
             [Op.like]: '%'+search+'%'
         }},
@@ -43,6 +46,9 @@ export const getUsers = async(req, res) =>{
                 [Op.like]: '%'+search+'%'
             }},
             {alamat_domisili:{
+                [Op.like]: '%'+search+'%'
+            }},
+            {kategori_orang:{
                 [Op.like]: '%'+search+'%'
             }},
             {kepemilikan:{
